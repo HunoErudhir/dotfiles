@@ -9,6 +9,7 @@ git clone https://aur.archlinux.org/paru-bin.git
 cd paru-bin/ && makepkg -si
 
 # Atualizando todo sistema
+cd
 echo "ATUALIZANDO"
 sudo sed -i '17 s/^#//' /etc/paru.conf
 sudo sed -i '33 s/^#//' /etc/pacman.conf 
@@ -21,7 +22,7 @@ paru -S --noconfirm --needed steam alsa-utils winetricks wine-gecko wine-mono wi
 # ----------------WM-------------------- #
 # Instalando awesome-wm e fontes
 echo "Instalando windown manager"
-paru -S awesome dmenu xf86-video-ati mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon amdvlk --needed --noconfirm
+paru -S awesome dmenu xf86-video-ati mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon udiskie amdvlk --needed --noconfirm
 
 echo "INSTALANDO FONTES"
 sudo pacman -S $(pacman -Ssq noto-fonts) --noconfirm
@@ -38,6 +39,14 @@ cp ~/dotfiles/awesome/ ~/.config/
 # Configurando nvim
 rm -rf ~/.config/nvim/init.vim
 cp ~/dotfiles/nvim/init.vim ~/.config/nvim/
+
+# Configurando xinitrc
+cd
+paru -S --noconfirm --needed xorg-server xorg-xinit
+touch ~/.xinitrc
+echo 'udiskies &' > .xinitrc
+echo 'setxkbmap -layout br -variant abnt2 &' >> .xinitrc
+echo 'exec awesome' >> .xinitrc
 # --------------TERMINAL----------------- #
 git clone git://git.suckless.org/st
 cd st
