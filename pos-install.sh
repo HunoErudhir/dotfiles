@@ -4,7 +4,7 @@ echo "Iniciando Pós-Instalação"
 
 # Instalando paru
 echo "Instalando paru"
-sudo pacman -Syu git base-devel --needed --noconfirm
+sudo pacman -Syu git base-devel cmake --needed --noconfirm
 git clone https://aur.archlinux.org/paru-bin.git
 cd paru-bin/ && makepkg -si
 
@@ -16,12 +16,12 @@ paru --noconfirm
 
 # Instalando pacotes
 echo "Instalando pacotes comuns"
-paru -S --noconfirm --needed steam winetricks wine-gecko wine-mono wine-staging firefox vlc keepassxc qbittorrent zip unzip unrar rar flameshot htop libreoffice neofetch feh nvim ranger thunar leafpad wget xdg-user-dirs
+paru -S --noconfirm --needed steam alsa-utils winetricks wine-gecko wine-mono wine-staging firefox vlc keepassxc qbittorrent p7zip unzip unrar flameshot htop libreoffice neofetch feh nvim ranger thunar leafpad wget xdg-user-dirs
 
 # ----------------WM-------------------- #
 # Instalando awesome-wm e fontes
 echo "Instalando windown manager"
-paru -S awesome dmenu --noconfirm
+paru -S awesome dmenu xf86-video-ati mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon amdvlk --needed --noconfirm
 
 echo "INSTALANDO FONTES"
 sudo pacman -S $(pacman -Ssq noto-fonts) --noconfirm
@@ -33,7 +33,6 @@ xdg-user-dirs-update
 # Configurando awesome
 echo "CONFIGURANDO..."
 rm -rf ~/.config/awesome/
-git clone https://github.com/HunoErudhir/dotfiles
 cp ~/dotfiles/awesome/ ~/.config/
 
 # Configurando nvim
@@ -60,6 +59,7 @@ mv BetterSpades ~/Desktop/
 cd
 echo "Instalando Dwarf Fortress"
 # DF de fato
+paru -S --noconfirm sdl sdl2_ttf sdl_image glu gtk3 glib2 
 wget http://www.bay12games.com/dwarves/df_47_05_linux.tar.bz2
 tar -xvf df_47_05_linux.tar.bz2
 
